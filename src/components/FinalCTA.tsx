@@ -26,7 +26,7 @@ export default function FinalCTA() {
     <section
       id="cta"
       ref={sectionRef}
-      className="relative overflow-hidden py-36 px-6"
+      className="relative overflow-hidden py-20 md:py-36 px-6"
       style={{ background: "#0D0604" }}
     >
       {/* Full-bleed background glow */}
@@ -39,7 +39,7 @@ export default function FinalCTA() {
       />
 
       {/* Top decorative rule */}
-      <div className="gold-rule mb-20 max-w-4xl mx-auto" />
+      <div className="gold-rule mb-10 md:mb-20 max-w-4xl mx-auto" />
 
       <div className="relative max-w-3xl mx-auto text-center">
         {/* Eyebrow */}
@@ -162,7 +162,7 @@ export default function FinalCTA() {
       </div>
 
       {/* Bottom decorative rule */}
-      <div className="gold-rule mt-20 max-w-4xl mx-auto" />
+      <div className="gold-rule mt-10 md:mt-20 max-w-4xl mx-auto" />
 
       {/* Footer bar */}
       <div className="relative mt-10 max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">

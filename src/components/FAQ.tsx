@@ -51,7 +51,7 @@ function FAQItem({
     >
       <button
         onClick={() => setOpen((p) => !p)}
-        className="w-full flex items-start justify-between gap-6 py-6 text-left focus:outline-none group"
+        className="w-full flex items-start justify-between gap-3 md:gap-6 py-6 text-left focus:outline-none group"
         aria-expanded={open}
       >
         <span

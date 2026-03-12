@@ -37,7 +37,7 @@ const PHASES = [
 /* Each phase has a [fadeIn, show, fadeOut, hidden] window in 0–1 scroll space.
    Overlapping windows create smooth crossfades between phases.            */
 const WINDOWS = [
-  [0.00, 0.04, 0.22, 0.30],
+  [0.00, 0.00, 0.22, 0.30],   // phase 0 — fully visible from scroll start
   [0.25, 0.35, 0.48, 0.55],
   [0.50, 0.60, 0.72, 0.78],
   [0.75, 0.83, 0.96, 1.00],
@@ -47,10 +47,11 @@ function calcOpacity(
   p: number,
   [fadeIn, show, fadeOut, hidden]: readonly [number, number, number, number]
 ): number {
-  if (p < fadeIn)   return 0;
-  if (show <= fadeIn || p <= show) return fadeIn === show ? 1 : (p - fadeIn) / (show - fadeIn);
-  if (p <= fadeOut) return 1;
-  if (p < hidden)   return 1 - (p - fadeOut) / (hidden - fadeOut);
+  if (p < fadeIn)  return 0;
+  // when show === fadeIn (instant full opacity), p < show is false → falls through to full-visible check
+  if (p < show)    return (p - fadeIn) / (show - fadeIn);
+  if (p < fadeOut) return 1;
+  if (p < hidden)  return 1 - (p - fadeOut) / (hidden - fadeOut);
   return 0;
 }
 
@@ -160,7 +161,7 @@ export default function HeroParallax() {
           {/* ── DYNAMIC: Phase text stack ──
               All four phases are in the DOM simultaneously.
               Each fades in/out via its own opacity window.           */}
-          <div className="relative" style={{ height: "9rem" }}>
+          <div className="relative" style={{ height: "clamp(9rem, 24vh, 12rem)" }}>
             {PHASES.map((phase, i) => {
               const opacity = prefersReducedMotion
                 ? i === 0 ? 1 : 0
@@ -251,9 +252,9 @@ export default function HeroParallax() {
           </div>
         )}
 
-        {/* ── PHASE INDICATOR DOTS (right edge, mid-height) ── */}
+        {/* ── PHASE INDICATOR DOTS (right edge, mid-height — hidden on small screens) ── */}
         {!prefersReducedMotion && (
-          <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3">
+          <div className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 flex-col gap-3">
             {PHASES.map((_, i) => {
               const op = phaseOpacities[i];
               return (
