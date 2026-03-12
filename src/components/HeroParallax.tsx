@@ -127,13 +127,28 @@ export default function HeroParallax() {
           </svg>
         </div>
 
-        {/* ── VIDEO ── */}
+        {/* ── VIDEO ──
+            MP4 source listed first → iOS Safari picks it (no WebM support).
+            autoPlay+muted+playsInline forces iOS to start buffering immediately;
+            we pause instantly in onLoadedMetadata so scrubbing via currentTime works. */}
         {!prefersReducedMotion ? (
-          <video ref={videoRef} src="/video/wins-hero.webm" muted playsInline preload="auto"
-            onLoadedMetadata={() => setVideoReady(true)}
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onLoadedMetadata={() => {
+              const v = videoRef.current;
+              if (v) { v.pause(); v.currentTime = 0; }
+              setVideoReady(true);
+            }}
             className="absolute inset-0 w-full h-full object-cover"
             style={{ opacity: videoReady ? 1 : 0, transition: "opacity 1s ease" }}
-          />
+          >
+            <source src="/video/wins-hero.mp4"  type="video/mp4" />
+            <source src="/video/wins-hero.webm" type="video/webm" />
+          </video>
         ) : (
           <div className="absolute inset-0 w-full h-full bg-cover bg-center"
             style={{ backgroundImage: "url(/images/wins-hero-poster.webp)" }} />
@@ -254,7 +269,7 @@ export default function HeroParallax() {
 
         {/* ── PHASE INDICATOR DOTS (right edge, mid-height — hidden on small screens) ── */}
         {!prefersReducedMotion && (
-          <div className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 flex-col gap-3">
+          <div className="flex flex-col absolute right-6 top-1/2 -translate-y-1/2 gap-3">
             {PHASES.map((_, i) => {
               const op = phaseOpacities[i];
               return (
