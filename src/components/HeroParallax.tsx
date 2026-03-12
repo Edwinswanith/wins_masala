@@ -129,29 +129,36 @@ export default function HeroParallax() {
 
         {/* ── VIDEO ──
             MP4 source listed first → iOS Safari picks it (no WebM support).
-            autoPlay+muted+playsInline forces iOS to start buffering immediately;
-            we pause instantly in onLoadedMetadata so scrubbing via currentTime works. */}
+            Poster fallback prevents blank hero on slow/mobile video readiness;
+            once first frame data is ready, we pause and scrub via currentTime. */}
         {!prefersReducedMotion ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            onLoadedMetadata={() => {
-              const v = videoRef.current;
-              if (v) { v.pause(); v.currentTime = 0; }
-              setVideoReady(true);
-            }}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ opacity: videoReady ? 1 : 0, transition: "opacity 1s ease" }}
-          >
-            <source src="/video/wins-hero.mp4"  type="video/mp4" />
-            <source src="/video/wins-hero.webm" type="video/webm" />
-          </video>
+          <>
+            <div
+              className="absolute inset-0 w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: "url(/images/wins-hero-poster.jpg)" }}
+            />
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              poster="/images/wins-hero-poster.jpg"
+              onLoadedData={() => {
+                const v = videoRef.current;
+                if (v) { v.pause(); v.currentTime = 0; }
+                setVideoReady(true);
+              }}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ opacity: videoReady ? 1 : 0.35, transition: "opacity 1s ease" }}
+            >
+              <source src="/video/wins-hero.mp4"  type="video/mp4" />
+              <source src="/video/wins-hero.webm" type="video/webm" />
+            </video>
+          </>
         ) : (
           <div className="absolute inset-0 w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/wins-hero-poster.webp)" }} />
+            style={{ backgroundImage: "url(/images/wins-hero-poster.jpg)" }} />
         )}
 
         {/* ── GRADIENT OVERLAY ── */}
