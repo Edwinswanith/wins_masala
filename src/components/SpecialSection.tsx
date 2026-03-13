@@ -37,7 +37,7 @@ export default function SpecialSection() {
           });
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();

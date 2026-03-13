@@ -59,7 +59,7 @@ export default function ChilliJourney() {
     <div
       ref={containerRef}
       className="relative"
-      style={{ height: prefersReducedMotion ? "auto" : "320vh" }}
+      style={{ height: prefersReducedMotion ? "auto" : "270vh" }}
     >
       <div
         className={prefersReducedMotion ? "" : "sticky top-0 h-screen overflow-hidden"}
@@ -67,7 +67,7 @@ export default function ChilliJourney() {
       >
         <section
           className={`relative h-full flex flex-col justify-center overflow-hidden px-6 ${
-            prefersReducedMotion ? "py-28" : "py-12"
+            prefersReducedMotion ? "py-28" : "py-8 md:py-12"
           }`}
         >
           {/* Decorative background */}
@@ -78,8 +78,8 @@ export default function ChilliJourney() {
 
           <div className="max-w-5xl mx-auto w-full">
             {/* Header */}
-            <div className="mb-10">
-              <div className="flex items-center gap-4 mb-5">
+            <div className="mb-6 md:mb-10">
+              <div className="flex items-center gap-4 mb-4">
                 <div className="h-px w-10 bg-[#C1380E]" />
                 <span
                   className="font-body text-xs tracking-[0.22em] uppercase"
@@ -89,7 +89,7 @@ export default function ChilliJourney() {
                 </span>
               </div>
               <h2
-                className="font-display font-black text-[clamp(1.8rem,4vw,3.5rem)] leading-[1.1]"
+                className="font-display font-black text-[clamp(1.4rem,3.5vw,3.2rem)] leading-[1.1]"
                 style={{ color: "#0D0604" }}
               >
                 How a global spice became a{" "}
@@ -131,7 +131,7 @@ export default function ChilliJourney() {
                   const isPast   = state === "past";
 
                   // Opacity by state
-                  const opacity = isActive ? 1 : isPast ? 0.6 : 0.25;
+                  const opacity = isActive ? 1 : isPast ? 0.65 : 0.38;
 
                   // Dot colours
                   const dotBorderColor = isActive
@@ -148,7 +148,7 @@ export default function ChilliJourney() {
                   return (
                     <div
                       key={step.era}
-                      className={`relative flex items-start gap-8 pb-8 transition-opacity duration-500 ${
+                      className={`relative flex items-start gap-8 pb-5 md:pb-8 transition-opacity duration-500 ${
                         i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                       }`}
                       style={{ opacity }}
@@ -197,13 +197,14 @@ export default function ChilliJourney() {
                           {step.era}
                         </span>
                         <h3
-                          className="font-display font-bold text-lg md:text-2xl mb-2 leading-snug transition-colors duration-500"
+                          className="font-display font-bold text-base md:text-2xl mb-1 md:mb-2 leading-snug transition-colors duration-500"
                           style={{ color: isActive ? "#0D0604" : "#2D1A14" }}
                         >
                           {step.heading}
                         </h3>
+                        {/* Body hidden on mobile to prevent viewport overflow */}
                         <p
-                          className="font-body text-sm leading-[1.85]"
+                          className="hidden sm:block font-body text-sm leading-[1.85]"
                           style={{ color: "#6B5147" }}
                         >
                           {step.body}
