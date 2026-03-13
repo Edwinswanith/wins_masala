@@ -66,8 +66,8 @@ export default function ChilliJourney() {
         style={{ background: "#FAF6F0" }}
       >
         <section
-          className={`relative h-full flex flex-col justify-center overflow-hidden px-6 ${
-            prefersReducedMotion ? "py-28" : "py-8 md:py-12"
+          className={`relative h-full flex flex-col justify-start overflow-hidden px-6 ${
+            prefersReducedMotion ? "py-28" : "pt-10 md:pt-14 pb-6"
           }`}
         >
           {/* Decorative background */}
@@ -78,7 +78,7 @@ export default function ChilliJourney() {
 
           <div className="max-w-5xl mx-auto w-full">
             {/* Header */}
-            <div className="mb-6 md:mb-10">
+            <div className="mb-4 md:mb-6">
               <div className="flex items-center gap-4 mb-4">
                 <div className="h-px w-10 bg-[#C1380E]" />
                 <span
@@ -89,7 +89,7 @@ export default function ChilliJourney() {
                 </span>
               </div>
               <h2
-                className="font-display font-black text-[clamp(1.4rem,3.5vw,3.2rem)] leading-[1.1]"
+                className="font-display font-black text-[clamp(1.3rem,2.4vw,2.4rem)] leading-[1.1]"
                 style={{ color: "#0D0604" }}
               >
                 How a global spice became a{" "}
@@ -148,7 +148,7 @@ export default function ChilliJourney() {
                   return (
                     <div
                       key={step.era}
-                      className={`relative flex items-start gap-8 pb-5 md:pb-8 transition-opacity duration-500 ${
+                      className={`relative flex items-start gap-8 pb-4 md:pb-5 transition-opacity duration-500 ${
                         i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                       }`}
                       style={{ opacity }}
@@ -197,7 +197,7 @@ export default function ChilliJourney() {
                           {step.era}
                         </span>
                         <h3
-                          className="font-display font-bold text-base md:text-2xl mb-1 md:mb-2 leading-snug transition-colors duration-500"
+                          className="font-display font-bold text-base md:text-xl mb-1 md:mb-2 leading-snug transition-colors duration-500"
                           style={{ color: isActive ? "#0D0604" : "#2D1A14" }}
                         >
                           {step.heading}
