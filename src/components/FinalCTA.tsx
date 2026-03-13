@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 
 export default function FinalCTA() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const retailOrderHref =
+    "mailto:hello@winschilli.com?subject=Order%20WINS%20Chilli%20Powder&body=Hi%20WINS%2C%20I%27d%20like%20to%20place%20a%20retail%20order.%20Please%20share%20availability%2C%20pricing%2C%20and%20delivery%20details.";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -85,7 +87,7 @@ export default function FinalCTA() {
         {/* Buttons */}
         <div className="reveal flex flex-wrap items-center justify-center gap-4">
           <a
-            href="#"
+            href={retailOrderHref}
             className="font-body font-semibold text-sm tracking-wide px-8 py-4 rounded-sm transition-all duration-300 inline-flex items-center gap-2 group"
             style={{ background: "#C1380E", color: "#FAF6F0" }}
             onMouseEnter={(e) => {
@@ -101,7 +103,7 @@ export default function FinalCTA() {
               (e.currentTarget as HTMLAnchorElement).style.boxShadow = "";
             }}
           >
-            Shop Wins
+            Order Now
             <svg viewBox="0 0 16 16" className="w-4 h-4 transition-transform group-hover:translate-x-1">
               <path
                 d="M3 8h10M9 4l4 4-4 4"
